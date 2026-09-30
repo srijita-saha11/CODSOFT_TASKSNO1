@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Srijita Saha</title>
+    <style>
+        /* CSS Reset and Global Styles */
+        * 
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body 
+        {
+            color: #333;
+            line-height: 1.6;
+            background-color: #fff;
+        }
+
+        a 
+        {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- Header / Navbar Section --- */
+        header 
+        {
+            background-color: #333;
+            color: white;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container .logo
+        {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo-container .tagline 
+        {
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+
+        nav ul 
+        {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a 
+        {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover 
+        {
+            color: #3b82f6;
+        }
+
+        /* --- Hero / Welcome Section --- */
+        #hero 
+        {
+            background-color: #4a4a4a;
+            color: white;
+            padding: 120px 5%;
+            display: flex;
+            align-items: right center;
+            background-image: linear-gradient(to right, rgba(74, 74, 74, 1) 40%, rgba(74, 74, 74, 0.4) 100%), url('c:/Users/DELL/Documents/DOC OF SRIJITA/SRIJITA.jpeg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: right;
+        }
+
+        .hero-content 
+        {
+            max-width: 600px;
+        }
+
+        .hero-content h1 
+        {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero-content p 
+        {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: #e0e0e0;
+        }
+
+        .btn-primary
+        {
+            display: inline-block;
+            background-color: #3b82f6; /* Blue button matching c:/Users/DELL/Documents/DOC OF SRIJITA/SRIJITA.jpeg */
+            color: white;
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .btn-primary:hover 
+        {
+            background-color: #2563eb;
+        }
+
+        /* --- General Section Formatting --- */
+        section 
+        {
+            padding: 80px 5%;
+        }
+
+        .section-title 
+        {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title::after 
+        {
+            content: "";
+            display: block;
+            width: 40px;
+            height: 3px;
+            background-color: #3b82f6;
+            margin-top: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* --- About Section --- */
+        #about 
+        {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+            background-color: #fff;
+        }
+
+        .about-image-container 
+        {
+            flex: 1;
+            background: url('c:/Users/DELL/Documents/DOC OF SRIJITA/SRIJITA.jpeg') center/cover no-repeat;
+            min-height: 450px;
+            border-radius: 8px;
+        }
+
+        .about-text-container {
+            flex: 1;
+        }
+
+        .about-text-container p {
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        /* --- Skills & Projects Sections --- */
+        #skills, #projects {
+            background-color: #f9f9f9;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid #eaeaea;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .project-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        /* --- Contact Section --- */
+        #contact {
+            background-color: #fff;
+        }
+
+        .contact-info p {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #222;
+            color: #ccc;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo-container">
+            <div class="logo">SRIJITA SAHA</div>
+            <div class="tagline">Just another My Blog site</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Works</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero / Intro Section -->
+    <section id="hero">
+        <div class="hero-content">
+            <h1>Srijita Saha</h1>
+            <p>Hi, I am a Software Developer. I an a fresher in IT Sector and want to work as a software developer, I'd like to build my next digital product.</p>
+            <a href="#contact" class="btn-primary">Hire Me</a>
+        </div>
+    </section>
+
+    <!-- About Section & Resume Link -->
+    <section id="about">
+        <div class="about-image-container" style="background-image: url('c:/Users/DELL/Documents/DOC OF SRIJITA/SRIJITA.jpeg');"></div>
+        <div class="about-text-container">
+            <h2 class="section-title">About Me</h2>
+            <p>I am a Developer blending expertise with industry know-how to guide your next property development.</p>
+            <p>Software Developers use software development languages and tools to write, edit, maintain, and test computer software. Software Developers follow the software development lifecycle (SDLC) to plan, design, build, test, and deploy software applications, ranging from websites and mobile applications to web applications and video games. In addition to creating new software, Software Developers improve and maintain the working order of existing software.</p>
+            
+            <!-- Resume Section -->
+            <a href="c:\Users\DELL\Documents\DOC OF SRIJITA\Srijita_Saha_Resume.pdf" class="btn-primary" target="_blank" download>Download Resume</a>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="grid-container">
+            <div class="card">
+                <h3>HTML5 & CSS3</h3>
+                <p>Crafting semantically sound and fully responsive layouts that perform beautifully across all devices.</p>
+            </div>
+            <div class="card">
+                <h3>JavaScript (ES6+)</h3>
+                <p>Building interactive and dynamic user interfaces using vanilla JavaScript and modern frameworks.</p>
+            </div>
+            <div class="card">
+                <h3>Web Design</h3>
+                <p>Focusing on user-centric design principles to ensure a seamless and intuitive user experience.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="grid-container">
+            <div class="card">
+                <img src="c:/Users/DELL/Documents/DOC OF SRIJITA/SRIJITA.jpeg" alt="Project Preview 1" class="project-img">
+                <h3>E-Commerce Dashboard</h3>
+                <p>A full-stack application featuring a custom admin panel, secure checkout, and inventory tracking.</p>
+            </div>
+            <div class="card">
+                <img src="c:/Users/DELL/Documents/DOC OF SRIJITA/SRIJITA.jpeg" alt="Project Preview 2" class="project-img">
+                <h3>Interactive Blog Site</h3>
+                <p>A responsive blogging platform supporting rich text editing, user authentication, and comments.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">Contact</h2>
+        <p>If you're interested in collaborating or want to say hello, feel free to reach out using the details below.</p>
+        <br>
+        <div class="contact-info">
+            <p><strong>Email:</strong> sahasrijita710@gmail.com</p>
+            <p><strong>Phone:</strong> +91 94327 94975</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Srijita Saha. All Rights Reserved.</p>
+        <p>Designed and Built with HTML & CSS</p>
+    </footer>
+
+</body>
+</html>
