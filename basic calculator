@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+        }
+        /* Custom font style to simulate a digital display */
+        .font-mono {
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center h-screen m-0">
+
+    <!-- Calculator Container matching the vibrant light blue casing -->
+    <div class="bg-[#3ca0ea] w-[360px] p-[30px] rounded-[20px] shadow-2xl">
+        
+        <!-- White display with bold black text -->
+        <div id="display" class="w-full h-[80px] bg-white text-black flex justify-end items-center text-5xl font-bold font-mono px-5 mb-6 rounded-md shadow-inner overflow-hidden whitespace-nowrap">
+            0
+        </div>
+
+        <div class="grid grid-cols-4 gap-[15px]">
+            <!-- Row 1: Controls and Divide -->
+            <button class="calc-btn col-span-2 bg-[#ff3b30] hover:bg-[#d32f2f] text-white text-3xl font-bold rounded-lg h-[70px] transition-colors shadow-md" data-type="clear">AC</button>
+            <button class="calc-btn bg-[#ff9500] hover:bg-[#e08200] text-white text-3xl font-bold rounded-lg h-[70px] transition-colors shadow-md" data-type="backspace">⌫</button>
+            <button class="calc-btn bg-[#216fcf] hover:bg-[#1a56a3] text-white text-4xl rounded-lg h-[70px] transition-colors shadow-md pb-1" data-type="operator">/</button>
+
+            <!-- Row 2: Numbers 7-9 and Multiply -->
+            <button class="calc-btn bg-[#216fcf] hover:bg-[#1a56a3] text-white text-4xl rounded-lg h-[70px] transition-colors shadow-md" data-type="number">7</button>
+            <button class="calc-btn bg-[#216fcf] hover:bg-[#1a56a3] text-white text-4xl rounded-lg h-[70px] transition-colors shadow-md" data-type="number">8</button>
+            <button class="calc-btn bg-[#216fcf] hover:bg-[#1a56a3] text-white text-4xl rounded-lg h-[70px] transition-colors shadow-md" data-type="number">9</button>
+            <button class="calc-btn bg-[#216fcf] hover:bg-[#1a56a3] text-white text-5xl rounded-lg h-[70px] transition-colors shadow-md pt-2" data-type="operator">*</button>
+
+            <!-- Row 3: Numbers 4-6 and Subtract -->
+            <button class="calc-btn bg-[#216fcf] hover:bg-[#1a56a3] text-white text-4xl rounded-lg h-[70px] transition-colors shadow-md" data-type="number">4</button>
+            <button class="calc-btn bg-[#216fcf] hover:bg-[#1a56a3] text-white text-4xl rounded-lg h-[70px] transition-colors shadow-md" data-type="number">5</button>
+            <button class="calc-btn bg-[#216fcf] hover:bg-[#1a56a3] text-white text-4xl rounded-lg h-[70px] transition-colors shadow-md" data-type="number">6</button>
+            <button class="calc-btn bg-[#216fcf] hover:bg-[#1a56a3] text-white text-6xl rounded-lg h-[70px] transition-colors shadow-md pb-2" data-type="operator">-</button>
+
+            <!-- Row 4: Numbers 1-3 and Add -->
+            <button class="calc-btn bg-[#216fcf] hover:bg-[#1a56a3] text-white text-4xl rounded-lg h-[70px] transition-colors shadow-md" data-type="number">1</button>
+            <button class="calc-btn bg-[#216fcf] hover:bg-[#1a56a3] text-white text-4xl rounded-lg h-[70px] transition-colors shadow-md" data-type="number">2</button>
+            <button class="calc-btn bg-[#216fcf] hover:bg-[#1a56a3] text-white text-4xl rounded-lg h-[70px] transition-colors shadow-md" data-type="number">3</button>
+            <button class="calc-btn bg-[#216fcf] hover:bg-[#1a56a3] text-white text-5xl rounded-lg h-[70px] transition-colors shadow-md pb-1" data-type="operator">+</button>
+
+            <!-- Row 5: Number 0 and Equals -->
+            <button class="calc-btn col-span-3 bg-[#216fcf] hover:bg-[#1a56a3] text-white text-4xl rounded-lg h-[70px] transition-colors shadow-md" data-type="number">0</button>
+            <button class="calc-btn bg-[#34c759] hover:bg-[#2da94f] text-white text-5xl rounded-lg h-[70px] transition-colors shadow-md pb-1" data-type="equals">=</button>
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById('display');
+        const buttons = document.querySelectorAll('.calc-btn');
+
+        let currentInput = '';
+        let previousInput = '';
+        let currentOperator = null;
+        let shouldResetDisplay = false; 
+
+        // Function to process mathematical operations safely
+        function calculate() {
+            if (currentOperator === null || shouldResetDisplay) return;
+            
+            const prev = parseFloat(previousInput);
+            const current = parseFloat(currentInput);
+
+            if (isNaN(prev) || isNaN(current)) return;
+
+            let result = 0;
+            switch (currentOperator) {
+                case '+':
+                    result = prev + current;
+                    break;
+                case '-':
+                    result = prev - current;
+                    break;
+                case '*':
+                    result = prev * current;
+                    break;
+                case '/':
+                    // Handle division by zero gracefully
+                    if (current === 0) {
+                        display.innerText = 'Error';
+                        currentInput = '';
+                        previousInput = '';
+                        currentOperator = null;
+                        shouldResetDisplay = true;
+                        return;
+                    }
+                    result = prev / current;
+                    break;
+            }
+
+            // Format result to avoid excessive decimals causing visual overflow
+            result = Math.round(result * 100000000) / 100000000;
+
+            currentInput = result.toString();
+            currentOperator = null;
+            shouldResetDisplay = true;
+            updateDisplay();
+        }
+
+        // Refreshes the digital screen based on current state
+        function updateDisplay() {
+            // Keep display at '0' if it's empty
+            if (currentInput === '' || currentInput === '-') {
+                display.innerText = '0';
+            } else {
+                display.innerText = currentInput;
+            }
+        }
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const type = button.getAttribute('data-type');
+                const value = button.innerText;
+
+                if (type === 'number') {
+                    // Start fresh if typing a number right after hitting '='
+                    if (shouldResetDisplay) {
+                        currentInput = '';
+                        shouldResetDisplay = false;
+                    }
+                    
+                    // Prevent multiple leading zeros
+                    if (currentInput === '0' && value === '0') return;
+                    if (currentInput === '0' && value !== '0') {
+                        currentInput = value;
+                    } else {
+                        currentInput += value;
+                    }
+                    updateDisplay();
+                } 
+                else if (type === 'operator') {
+                    // If replacing an operator before entering a new number
+                    if (currentInput === '' && previousInput !== '') {
+                        currentOperator = value;
+                        return;
+                    }
+                    if (currentInput === '') return;
+                    
+                    if (previousInput !== '' && !shouldResetDisplay) {
+                        calculate();
+                    }
+                    
+                    currentOperator = value;
+                    previousInput = currentInput;
+                    shouldResetDisplay = true; 
+                } 
+                else if (type === 'equals') {
+                    calculate();
+                }
+                else if (type === 'clear') {
+                    // All Clear Logic
+                    currentInput = '';
+                    previousInput = '';
+                    currentOperator = null;
+                    shouldResetDisplay = false;
+                    updateDisplay();
+                }
+                else if (type === 'backspace') {
+                    // Backspace Logic
+                    if (shouldResetDisplay) {
+                        currentInput = '';
+                        updateDisplay();
+                        return;
+                    }
+                    currentInput = currentInput.slice(0, -1);
+                    updateDisplay();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
