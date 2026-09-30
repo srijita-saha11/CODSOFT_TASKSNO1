@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nextora Landing Page</title>
+  <style>
+    /* Import a modern font similar to the design */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+    :root {
+      --bg-light: #F9F9F9;
+      --bg-green: #275F51;
+      --text-dark: #121212;
+      --text-gray: #6B6B6B;
+      --accent-orange: #FA7953;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-light);
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* The dark green background split on the right */
+    .background-split {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 32%;
+      background-color: var(--bg-green);
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* --- Navigation Bar --- */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 30px 0;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text-dark);
+      flex: 1;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      flex: 2;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-gray);
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-dark);
+    }
+
+    .auth-buttons {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex: 1;
+      justify-content: flex-end;
+    }
+
+    .login-btn {
+      text-decoration: none;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .signup-btn {
+      text-decoration: none;
+      background-color: #fff;
+      color: var(--text-dark);
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* --- Hero Section --- */
+    .hero {
+      display: flex;
+      margin-top: 50px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px;
+    }
+
+    .hero-content {
+      width: 50%;
+    }
+
+    .hero-content h1 {
+      font-size: 58px;
+      line-height: 1.15;
+      color: var(--text-dark);
+      margin-bottom: 24px;
+      font-weight: 500;
+    }
+
+    .hero-content p {
+      font-size: 15px;
+      color: var(--text-gray);
+      line-height: 1.6;
+      margin-bottom: 40px;
+      max-width: 85%;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      margin-bottom: 100px;
+    }
+
+    .btn-primary {
+      text-decoration: none;
+      background-color: var(--accent-orange);
+      color: #fff;
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 15px;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    .btn-secondary {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      font-size: 15px;
+    }
+
+    /* --- Partners / Logos --- */
+    .partners {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      color: var(--text-gray);
+      font-size: 18px;
+      font-weight: 600;
+    }
+    
+    .partners span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    /* Mocking the little circle icons next to logos */
+    .icon-circle {
+      width: 16px;
+      height: 16px;
+      border: 3px solid var(--text-gray);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    /* --- Hero Image & Floating Elements --- */
+    .hero-image-wrapper {
+      width: 50%;
+      position: relative;
+    }
+
+    .hero-image-wrapper img {
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      display: block;
+      object-fit: cover;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+
+    .floating-badge {
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      background-color: var(--bg-green);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      z-index: 2;
+    }
+
+    .avatars {
+      display: flex;
+    }
+
+    .avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid var(--bg-green);
+      margin-left: -8px;
+    }
+    
+    .avatar:first-child {
+      margin-left: 0;
+    }
+
+    /* Mock avatar colors */
+    .bg-blue { background-color: #4facfe; }
+    .bg-orange { background-color: var(--accent-orange); }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .hero { flex-direction: column; }
+      .hero-content, .hero-image-wrapper { width: 100%; }
+      .background-split { display: none; }
+      .auth-buttons a { color: var(--text-dark); }
+      .signup-btn { border: 1px solid var(--text-dark); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Right side dark green background -->
+  <div class="background-split"></div>
+
+  <div class="container">
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="logo">Nextora.</div>
+      <nav class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">About Us</a>
+        <a href="#">Services</a>
+        <a href="#">Projects</a>
+        <a href="#">Blog</a>
+        <a href="#">Pricing</a>
+      </nav>
+      <div class="auth-buttons">
+        <a href="#" class="login-btn">Log in</a>
+        <a href="#" class="signup-btn">Sign up</a>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="hero">
+      
+      <!-- Left Column: Text Content -->
+      <div class="hero-content">
+        <h1>Empower Your Business with Modern Solutions</h1>
+        <p>Drive growth, enhance productivity, and achieve more with our innovative services tailored for modern enterprises.</p>
+        
+        <div class="hero-actions">
+          <a href="#" class="btn-primary">Get Started</a>
+          <a href="#" class="btn-secondary">Explore Services</a>
+        </div>
+
+        <div class="partners">
+          <span><i class="icon-circle"></i> Ovalism</span>
+          <span><i class="icon-circle"></i> Orbital</span>
+          <span style="font-weight: 500;">webflow</span>
+        </div>
+      </div>
+
+      <!-- Right Column: Image & Badge -->
+      <div class="hero-image-wrapper">
+        <div class="floating-badge">
+          <div class="avatars">
+            <div class="avatar bg-blue"></div>
+            <div class="avatar bg-orange"></div>
+          </div>
+          <span>Active 2k Members</span>
+        </div>
+        
+        <!-- Placeholder image from Unsplash representing the woman on the laptop -->
+        <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=800&q=80" alt="Woman working on laptop">
+      </div>
+
+    </main>
+  </div>
+
+</body>
+</html>
